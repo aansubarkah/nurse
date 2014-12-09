@@ -1,5 +1,5 @@
 <?php
-App::uses('AppModel', 'Model');
+App::uses('AppModel', 'Model', 'Controller/Component');
 /**
  * User Model
  *
@@ -224,5 +224,12 @@ class User extends AppModel {
 			'finderQuery' => '',
 		)
 	);
+
+    public function beforeSave($options = array()) {
+        $this->data['User']['password'] = AuthComponent::password(
+            $this->data['User']['password']
+        );
+        return true;
+    }
 
 }
