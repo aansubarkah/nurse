@@ -6,12 +6,18 @@
 
 echo $this->element('header');
 ?>
-<div id="container">
-    <div class="row">
-        <?php echo $this->Session->flash(); ?>
+    <div id="container">
+        <div class="container">
+            <?php echo $this->Session->flash(); ?>
 
-        <?php echo $this->fetch('content'); ?>
+            <?php echo $this->fetch('content'); ?>
+        </div>
     </div>
-</div>
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
 <?php
 echo $this->element('footer');

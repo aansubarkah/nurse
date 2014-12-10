@@ -123,7 +123,8 @@ class UsersController extends AppController
         return $this->redirect(array('action' => 'index'));
     }
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Auth->allow('add');
     }
@@ -151,6 +152,6 @@ class UsersController extends AppController
      */
     public function logout()
     {
-
+        return $this->redirect($this->Auth->logout());
     }
 }
