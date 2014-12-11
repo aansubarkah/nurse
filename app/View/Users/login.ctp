@@ -14,13 +14,13 @@
                 "role" => "form"
             ));
 
-            echo $this->Form->input('email', array(
+            echo $this->Form->input('username', array(
                 'type' => 'text',
                 'label' => false,
                 'div' => 'form-group',
                 'class' => 'form-control',
-                'id' => 'email',
-                'placeholder' => 'Email'
+                'id' => 'username',
+                'placeholder' => 'Username'
             ));
 
             echo $this->Form->input('password', array(
@@ -40,6 +40,12 @@
                 'class' => 'btn btn-primary btn-sm btn-block'
             );
             echo $this->Form->end($options);
+
+            echo 'atau ';
+            echo $this->Html->link('Daftar', array(
+                'controller' => 'users',
+                'action' => 'add'
+            ));
             ?>
         </div>
     </div>
