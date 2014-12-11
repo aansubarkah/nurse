@@ -61,13 +61,13 @@ class UsersController extends AppController
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
-        $groups = $this->User->Group->find('list');
+        /*$groups = $this->User->Group->find('list');
         $departements = $this->User->Departement->find('list');
         $levels = $this->User->Level->find('list');
         $periods = $this->User->Period->find('list');
         $positionlevels = $this->User->Positionlevel->find('list');
         $positions = $this->User->Position->find('list');
-        $this->set(compact('groups', 'departements', 'levels', 'periods', 'positionlevels', 'positions'));
+        $this->set(compact('groups', 'departements', 'levels', 'periods', 'positionlevels', 'positions'));*/
     }
 
     /**
