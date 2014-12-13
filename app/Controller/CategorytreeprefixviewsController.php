@@ -111,4 +111,33 @@ class CategorytreeprefixviewsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+    public function lihat()
+    {
+        $this->layout = 'blank';
+        $tree = $this->Categorytreeprefixview->find('all', array(
+            'recursive' => -1,
+            'conditions' => array(
+                'Categorytreeprefixview.categorytreeparent_id !=' => null,
+                'Categorytreeprefixview.prefixposition_id !=' => 0,
+                'Categorytreeprefixview.categorytreeactive' => 1,
+                'OR' => array(
+                    array(
+                        'Categorytreeprefixview.categorytreeposition_id' => 1
+                    ),
+                    array(
+                        'Categorytreeprefixview.categorytreeposition_id' => 3
+                    )
+                )
+            ),
+            'fields' => array(
+                'Categorytreeprefixview.categoryname',
+                'Categorytreeprefixview.prefixname'
+            ),
+            'order' => array(
+                'Categorytreeprefixview.categorytreelft ASC'
+            )
+        ));
+        $this->set(compact('tree'));
+    }
 }
