@@ -14,8 +14,11 @@ echo $this->element('header');
                     <!-- menu di sini -->
                     <div class="col-md-4">
                         <div class="list-group">
-                            <a href="#" class="list-group-item disabled">BCP</a>
-                            <a href="#" class="list-group-item">Periode</a>
+                            <a href="#" class="list-group-item disabled">Ringkasan</a>
+                            <a href="#" class="list-group-item">Jabatan</a>
+                            <a href="#" class="list-group-item">Pangkat/Golongan</a>
+                            <a href="#" class="list-group-item">Unit Kerja</a>
+                            <a href="#" class="list-group-item">Atasan</a>
                         </div>
                     </div>
                     <!-- isi di sini -->
