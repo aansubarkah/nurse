@@ -45,6 +45,19 @@ class PagesController extends AppController {
  *	or MissingViewException in debug mode.
  */
 	public function display() {
+		$this->view = "home";
+		$title_for_layout = "Beranda";
+		$this->set(compact('title_for_layout'));
+	}
+
+	public function checkIfProfileComplete() {
+		$userId = $this->Auth->user('id');
+
+		//check departement
+		//$this->
+	}
+/*
+	public function display() {
 		$path = func_get_args();
 
 		$count = count($path);
@@ -73,4 +86,5 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+*/
 }

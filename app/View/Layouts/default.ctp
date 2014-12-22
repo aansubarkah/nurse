@@ -21,13 +21,23 @@ echo $this->element('header');
                     <!-- isi di sini -->
                     <div class="col-md-8">
                         <div class="row">
-                            <?php echo $this->Session->flash(); ?>
-                        </div>
-                        <div class="row">
                             <ol class="breadcrumb">
                                 <li><a href="#">Profil</a></li>
                                 <li class="active">Atasan</li>
                             </ol>
+                        </div>
+                        <div class="row">
+                            <?php
+                            if (empty($this->Session->flash())) {
+                                ?>
+                                <div class="alert alert-warning alert-dismissable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <strong>Ups!</strong> <?php echo $this->Session->flash(); ?>
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <div class="row">
                             <?php echo $this->fetch('content'); ?>

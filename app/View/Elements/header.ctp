@@ -10,7 +10,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Perawat</title>
+    <title><?php
+        if(isset($title_for_layout)) {
+            echo $title_for_layout;
+        } else {
+            echo "Perawat";
+        }
+        ?>
+    </title>
     <?php
     echo $this->Html->meta('icon');
 
