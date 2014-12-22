@@ -3,4 +3,5 @@
  * @var View $this
  *
  */
-echo 'lorem ipsum';
+//echo 'lorem ipsum1aaa';
+print_r($pengguna);

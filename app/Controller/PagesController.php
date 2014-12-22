@@ -15,7 +15,8 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Controller
  * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License *
+ *
  */
 
 App::uses('AppController', 'Controller');
@@ -27,6 +28,7 @@ App::uses('AppController', 'Controller');
  *
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
+ * @property User $User
  */
 class PagesController extends AppController {
 
@@ -47,14 +49,43 @@ class PagesController extends AppController {
 	public function display() {
 		$this->view = "home";
 		$title_for_layout = "Beranda";
-		$this->set(compact('title_for_layout'));
+		$pengguna = $this->checkIfProfileComplete();
+		$this->set(compact('title_for_layout', 'pengguna'));
 	}
 
-	public function checkIfProfileComplete() {
+	private function checkIfProfileComplete() {
 		$userId = $this->Auth->user('id');
+		$arrReturn = array();
 
-		//check departement
-		//$this->
+		$this->loadModel('User');
+		$this->User->unbindModel(array(
+			'belongsTo' => array('Group'),
+			'hasMany' => array(
+				'Chief', 'Evaluation',
+				'Transactioncategorytreeview', 'Transaction'
+			),
+			'hasAndBelongsToMany' => array(
+				'Period'
+			)
+		));
+
+		//check user
+		//$user = $this->User->find('first', array(
+		$arrReturn = $this->User->find('first', array(
+			'recursive' => 1,
+			'conditions' => array(
+				'User.id' => $userId,
+				'User.active' => 1
+			)
+		));
+/*
+		if(empty($user['User']['number'])) $arrReturn[] = 'NIP belum diisi';
+		if(empty($user['User']['cardnumber'])) $arrReturn[] = 'No Karpeg belum diisi';
+		if(empty($user['User']['fullname'])) $arrReturn[] = 'Nama Lengkap belum diisi';
+*/
+		//check user level
+
+		return $arrReturn;
 	}
 /*
 	public function display() {
