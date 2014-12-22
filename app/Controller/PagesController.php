@@ -30,95 +30,113 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  * @property User $User
  */
-class PagesController extends AppController {
+class PagesController extends AppController
+{
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
-	public $uses = array();
+    /**
+     * This controller does not use a model
+     *
+     * @var array
+     */
+    public $uses = array();
 
-/**
- * Displays a view
- *
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
-	public function display() {
-		$this->view = "home";
-		$title_for_layout = "Beranda";
-		$isProfileCompleteYet = $this->checkIfProfileComplete();
-		//$isProfileCompleteYet = array();
-		$this->set(compact('title_for_layout', 'isProfileCompleteYet'));
-	}
+    /**
+     * Displays a view
+     *
+     * @return void
+     * @throws NotFoundException When the view file could not be found
+     *    or MissingViewException in debug mode.
+     */
+    public function display()
+    {
+        $breadCrumb = array();
+        $breadCrumb[0]['title'] = 'Perawat';
+        $breadCrumb[0]['controller'] = '/';
+        $breadCrumb[0]['action'] = '/';
 
-	private function checkIfProfileComplete() {
-		$userId = $this->Auth->user('id');
-		$arrReturn = array();
+        $this->view = "home";
+        $title_for_layout = "Beranda";
+        $isProfileCompleteYet = $this->checkIfProfileComplete();
+        $this->set(compact('title_for_layout', 'isProfileCompleteYet', 'breadCrumb'));
+    }
 
-		$this->loadModel('User');
-		$this->User->unbindModel(array(
-			'belongsTo' => array('Group'),
-			'hasMany' => array(
-				'Chief', 'Evaluation',
-				'Transactioncategorytreeview', 'Transaction'
-			),
-			'hasAndBelongsToMany' => array(
-				'Period'
-			)
-		));
+    private function checkIfProfileComplete()
+    {
+        $userId = $this->Auth->user('id');
+        $arrReturn = array();
 
-		//check user
-		$user = $this->User->find('first', array(
-		//$arrReturn = $this->User->find('first', array(
-			'recursive' => 1,
-			'conditions' => array(
-				'User.id' => $userId,
-				'User.active' => 1
-			)
-		));
+        $this->loadModel('User');
+        $this->User->unbindModel(array(
+            'belongsTo' => array('Group'),
+            'hasMany' => array(
+                'Chief', 'Evaluation',
+                'Transactioncategorytreeview', 'Transaction'
+            ),
+            'hasAndBelongsToMany' => array(
+                'Period'
+            )
+        ));
 
-		if(empty($user['User']['number'])) $arrReturn[] = 'NIP belum diisi';
-		if(empty($user['User']['cardnumber'])) $arrReturn[] = 'No Karpeg belum diisi';
-		if(empty($user['User']['fullname'])) $arrReturn[] = 'Nama Lengkap belum diisi';
-		if(empty($user['Departement'])) $arrReturn[] = 'Unit Kerja belum diisi';
-		if(empty($user['Position'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
-		if(empty($user['Positionlevel'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
-		if(empty($user['Level'])) $arrReturn[] = 'Pangkat/Golongan belum diisi';
+        //check user
+        $user = $this->User->find('first', array(
+            'recursive' => 1,
+            'conditions' => array(
+                'User.id' => $userId,
+                'User.active' => 1
+            )
+        ));
 
-		return $arrReturn;
-	}
-/*
-	public function display() {
-		$path = func_get_args();
+        if (empty($user['User']['number'])) $arrReturn[] = 'NIP belum diisi';
+        if (empty($user['User']['cardnumber'])) $arrReturn[] = 'No Karpeg belum diisi';
+        if (empty($user['User']['fullname'])) $arrReturn[] = 'Nama Lengkap belum diisi';
+        if (empty($user['Departement'])) $arrReturn[] = 'Unit Kerja belum diisi';
+        if (empty($user['Position'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
+        if (empty($user['Positionlevel'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
+        if (empty($user['Level'])) $arrReturn[] = 'Pangkat/Golongan belum diisi';
 
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
-		}
-		$page = $subpage = $title_for_layout = null;
+        //check chief
+        $departement = array();
+        if(!empty($user['Departement'])) {
+            $departement = $this->User->Departement->find('first', array(
+                'recursive' => 0,
+                'conditions' => array(
+                    'Departement.id' => $user['Departement']['id']
+                )
+            ));
+        }
+        if(empty($departement['Chief'])) $arrReturn[] = 'Atasan belum diisi';
 
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
+        return $arrReturn;
+    }
+    /*
+        public function display() {
+            $path = func_get_args();
 
-		try {
-			$this->render(implode('/', $path));
-		} catch (MissingViewException $e) {
-			if (Configure::read('debug')) {
-				throw $e;
-			}
-			throw new NotFoundException();
-		}
-	}
-*/
+            $count = count($path);
+            if (!$count) {
+                return $this->redirect('/');
+            }
+            $page = $subpage = $title_for_layout = null;
+
+            if (!empty($path[0])) {
+                $page = $path[0];
+            }
+            if (!empty($path[1])) {
+                $subpage = $path[1];
+            }
+            if (!empty($path[$count - 1])) {
+                $title_for_layout = Inflector::humanize($path[$count - 1]);
+            }
+            $this->set(compact('page', 'subpage', 'title_for_layout'));
+
+            try {
+                $this->render(implode('/', $path));
+            } catch (MissingViewException $e) {
+                if (Configure::read('debug')) {
+                    throw $e;
+                }
+                throw new NotFoundException();
+            }
+        }
+    */
 }

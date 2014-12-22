@@ -24,8 +24,39 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->User->recursive = 0;
-        $this->set('users', $this->Paginator->paginate());
+        $breadCrumb = array();
+        $breadCrumb[0]['title'] = 'Profil';
+        $breadCrumb[0]['controller'] = 'users';
+        $breadCrumb[0]['action'] = '/';
+        $breadCrumb[1]['title'] = 'Ringkasan';
+        $breadCrumb[1]['controller'] = 'users';
+        $breadCrumb[1]['action'] = '/';
+
+        $this->layout = 'profile';
+
+        if (!empty($this->Auth->user('fullname'))) {
+            $title_for_layout = $this->Auth->user('fullname');
+        } else {
+            $title_for_layout = 'Profil';
+        }
+
+        $this->set(compact('title_for_layout', 'breadCrumb'));
+    }
+
+    public function password() {
+        $breadCrumb = array();
+        $breadCrumb[0]['title'] = 'Profil';
+        $breadCrumb[0]['controller'] = 'users';
+        $breadCrumb[0]['action'] = '/';
+        $breadCrumb[1]['title'] = 'Ubah Password';
+        $breadCrumb[1]['controller'] = 'users';
+        $breadCrumb[1]['action'] = 'password';
+
+        $this->layout = 'profile';
+
+        $title_for_layout = 'Ubah Password';
+
+        $this->set(compact('title_for_layout', 'breadCrumb'));
     }
 
     /**

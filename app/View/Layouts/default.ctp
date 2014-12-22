@@ -20,12 +20,7 @@ echo $this->element('header');
                     </div>
                     <!-- isi di sini -->
                     <div class="col-md-8">
-                        <div class="row">
-                            <ol class="breadcrumb">
-                                <li><a href="#">Profil</a></li>
-                                <li class="active">Atasan</li>
-                            </ol>
-                        </div>
+                        <?php echo $this->element('breadcrumb'); ?>
                         <div class="row">
                             <?php
                             if (!empty($this->Session->flash())) {
