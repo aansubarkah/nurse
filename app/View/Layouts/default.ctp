@@ -28,7 +28,7 @@ echo $this->element('header');
                         </div>
                         <div class="row">
                             <?php
-                            if (empty($this->Session->flash())) {
+                            if (!empty($this->Session->flash())) {
                                 ?>
                                 <div class="alert alert-warning alert-dismissable" role="alert">
                                     <button type="button" class="close" data-dismiss="alert"><span

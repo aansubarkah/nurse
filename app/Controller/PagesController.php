@@ -49,8 +49,9 @@ class PagesController extends AppController {
 	public function display() {
 		$this->view = "home";
 		$title_for_layout = "Beranda";
-		$pengguna = $this->checkIfProfileComplete();
-		$this->set(compact('title_for_layout', 'pengguna'));
+		$isProfileCompleteYet = $this->checkIfProfileComplete();
+		//$isProfileCompleteYet = array();
+		$this->set(compact('title_for_layout', 'isProfileCompleteYet'));
 	}
 
 	private function checkIfProfileComplete() {
@@ -70,20 +71,22 @@ class PagesController extends AppController {
 		));
 
 		//check user
-		//$user = $this->User->find('first', array(
-		$arrReturn = $this->User->find('first', array(
+		$user = $this->User->find('first', array(
+		//$arrReturn = $this->User->find('first', array(
 			'recursive' => 1,
 			'conditions' => array(
 				'User.id' => $userId,
 				'User.active' => 1
 			)
 		));
-/*
+
 		if(empty($user['User']['number'])) $arrReturn[] = 'NIP belum diisi';
 		if(empty($user['User']['cardnumber'])) $arrReturn[] = 'No Karpeg belum diisi';
 		if(empty($user['User']['fullname'])) $arrReturn[] = 'Nama Lengkap belum diisi';
-*/
-		//check user level
+		if(empty($user['Departement'])) $arrReturn[] = 'Unit Kerja belum diisi';
+		if(empty($user['Position'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
+		if(empty($user['Positionlevel'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
+		if(empty($user['Level'])) $arrReturn[] = 'Pangkat/Golongan belum diisi';
 
 		return $arrReturn;
 	}
