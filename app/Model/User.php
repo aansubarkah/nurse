@@ -10,6 +10,7 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
  * @property Transactioncategorytreeview $Transactioncategorytreeview
  * @property Transaction $Transaction
  * @property Departement $Departement
+ * @property Education $Education
  * @property Level $Level
  * @property Period $Period
  * @property Positionlevel $Positionlevel
@@ -164,6 +165,19 @@ class User extends AppModel {
 			'joinTable' => 'departements_users',
 			'foreignKey' => 'user_id',
 			'associationForeignKey' => 'departement_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+		),
+		'Education' => array(
+			'className' => 'Education',
+			'joinTable' => 'educations_users',
+			'foreignKey' => 'user_id',
+			'associationForeignKey' => 'education_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',

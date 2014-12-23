@@ -20,7 +20,7 @@ echo $this->element('header');
                             <?php echo $this->Session->flash(); ?>
                         </div>
                         <div class="row">
-                            <?php echo $this->fetch('content'); ?>
+                            <?php echo $this->fetch('content');?>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
                                     <?php
                                     echo $this->Html->link('Profil', array(
                                         'controller' => 'users',
-                                        'action' => 'profile'
+                                        'action' => 'index'
                                     ));
                                     ?>
                                 </li>

@@ -18,19 +18,32 @@ class UsersController extends AppController
     public $components = array('Paginator');
 
     /**
+     * Breadcrumb for all
+     *
+     * @var array
+     */
+    private $breadCrumb = array(
+        0 => array(
+            'title'         => 'Profil',
+            'controller'    => 'users',
+            'action'    => '/'
+        )
+    );
+
+
+    /**
      * index method
      *
      * @return void
      */
     public function index()
     {
-        $breadCrumb = array();
-        $breadCrumb[0]['title'] = 'Profil';
-        $breadCrumb[0]['controller'] = 'users';
-        $breadCrumb[0]['action'] = '/';
-        $breadCrumb[1]['title'] = 'Ringkasan';
-        $breadCrumb[1]['controller'] = 'users';
-        $breadCrumb[1]['action'] = '/';
+        $breadCrumb = $this->breadCrumb;
+        $breadCrumb[1] = array(
+            'title'         => 'Ringkasan',
+            'controller'    => 'users',
+            'action'    => '/'
+        );
 
         $this->layout = 'profile';
 
@@ -44,13 +57,12 @@ class UsersController extends AppController
     }
 
     public function password() {
-        $breadCrumb = array();
-        $breadCrumb[0]['title'] = 'Profil';
-        $breadCrumb[0]['controller'] = 'users';
-        $breadCrumb[0]['action'] = '/';
-        $breadCrumb[1]['title'] = 'Ubah Password';
-        $breadCrumb[1]['controller'] = 'users';
-        $breadCrumb[1]['action'] = 'password';
+        $breadCrumb = $this->breadCrumb;
+        $breadCrumb[1] = array(
+            'title'         => 'Ubah Password',
+            'controller'    => 'users',
+            'action'    => 'password'
+        );
 
         $this->layout = 'profile';
 
