@@ -89,10 +89,13 @@ class PagesController extends AppController
         if (empty($user['User']['number'])) $arrReturn[] = 'NIP belum diisi';
         if (empty($user['User']['cardnumber'])) $arrReturn[] = 'No Karpeg belum diisi';
         if (empty($user['User']['fullname'])) $arrReturn[] = 'Nama Lengkap belum diisi';
+        if (empty($user['User']['birthdate'])) $arrReturn[] = 'Tanggal Lahir belum diisi';
+        if (empty($user['User']['birthplace'])) $arrReturn[] = 'Tempat Lahir belum diisi';
         if (empty($user['Departement'])) $arrReturn[] = 'Unit Kerja belum diisi';
         if (empty($user['Position'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
         if (empty($user['Positionlevel'])) $arrReturn[] = 'Jabatan Fungsional belum diisi';
         if (empty($user['Level'])) $arrReturn[] = 'Pangkat/Golongan belum diisi';
+        if (empty($user['Education'])) $arrReturn[] = 'Pendidikan Terakhir belum diisi';
 
         //check chief
         $departement = array();
