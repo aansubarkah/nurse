@@ -53,7 +53,15 @@ class UsersController extends AppController
             $title_for_layout = 'Profil';
         }
 
-        $this->set(compact('title_for_layout', 'breadCrumb'));
+        $user = $this->User->find('first', array(
+            'recursive' => -1,
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id'),
+                'User.active' => 1
+            )
+        ));
+
+        $this->set(compact('title_for_layout', 'breadCrumb', 'user'));
     }
 
     public function password() {

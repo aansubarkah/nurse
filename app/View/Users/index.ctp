@@ -2,6 +2,7 @@
 /**
  * @var View $this
  */
+print_r($user);
 $this->Form->create('User', array(
     'role' => 'form'
 ));
@@ -15,31 +16,36 @@ $this->Form->inputDefaults(array(
 echo $this->Form->input('fullname', array(
     'type' => 'text',
     'id' => 'fullname',
-    'placeholder' => 'Nama Lengkap'
+    'placeholder' => 'Nama Lengkap',
+    'default' => $user['User']['fullname']
 ));
 
 echo $this->Form->input('number', array(
     'type' => 'text',
     'id' => 'number',
-    'placeholder' => 'NIP'
+    'placeholder' => 'NIP',
+    'default' => $user['User']['number']
 ));
 
 echo $this->Form->input('cardnumber', array(
     'type' => 'text',
     'id' => 'cardnumber',
-    'placeholder' => 'Nomor Karpeg'
+    'placeholder' => 'Nomor Karpeg',
+    'default' => $user['User']['cardnumber']
 ));
 
 echo $this->Form->input('birthplace', array(
     'type' => 'text',
     'id' => 'birthplace',
-    'placeholder' => 'Tempat Lahir'
+    'placeholder' => 'Tempat Lahir',
+    'default' => $user['User']['birthplace']
 ));
 
 echo $this->Form->input('birthdate', array(
     'type' => 'text',
     'id' => 'birthdate',
-    'placeholder' => 'Tanggal Lahir'
+    'placeholder' => 'Tanggal Lahir',
+    'default' => $user['User']['birthplace']
 ));
 
 $sexOptions = array(0 => 'Wanita', 1 => 'Pria');
@@ -48,7 +54,7 @@ echo $this->Form->input('sex', array(
     'id' => 'sex',
     'placeholder' => 'Jenis Kelamin',
     'options' => $sexOptions,
-    'default' => AuthComponent::user('sex')
+    'default' => $user['User']['sex']
 ));
 
 echo $this->Form->input('education_id', array(
