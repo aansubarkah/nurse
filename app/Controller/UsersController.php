@@ -53,6 +53,17 @@ class UsersController extends AppController
             $title_for_layout = 'Profil';
         }
 
+        $this->User->unbindModel(array(
+            'belongsTo' => array('Group'),
+            'hasMany' => array(
+                'Chief', 'Evaluation',
+                'Transactioncategorytreeview', 'Transaction'
+            ),
+            'hasAndBelongsToMany' => array(
+                'Period'
+            )
+        ));
+
         $user = $this->User->find('first', array(
             'recursive' => -1,
             'conditions' => array(
@@ -61,7 +72,16 @@ class UsersController extends AppController
             )
         ));
 
-        $this->set(compact('title_for_layout', 'breadCrumb', 'user'));
+        $positionLevel = $this->User->UsersPositionlevel->find('first', array(
+            'recursive' => 0,
+            'order' => array('UsersPositionlevel.start DESC'),
+            'conditions' => array(
+                'UsersPositionlevel.user_id' => $this->Auth->user('id'),
+                'UsersPositionlevel.active' => 1
+            )
+        ));
+
+        $this->set(compact('title_for_layout', 'breadCrumb', 'user', 'positionLevel'));
     }
 
     public function password() {

@@ -15,6 +15,12 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
  * @property Period $Period
  * @property Positionlevel $Positionlevel
  * @property Position $Position
+ * @property UsersPosition $UsersPosition
+ * @property UsersPositionlevel $UsersPositionlevel
+ * @property UsersPeriod $UsersPeriod
+ * @property DepartementsUser $DepartementsUser
+ * @property EducationsUser $EducationsUser
+ * @property LevelsUser $LevelsUser
  */
 class User extends AppModel {
 
@@ -140,6 +146,84 @@ class User extends AppModel {
 		),
 		'Transaction' => array(
 			'className' => 'Transaction',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'UsersPosition' => array(
+			'className' => 'UsersPosition',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'UsersPositionlevel' => array(
+			'className' => 'UsersPositionlevel',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'UsersPeriod' => array(
+			'className' => 'UsersPeriod',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'DepartementsUser' => array(
+			'className' => 'DepartementsUser',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'EducationsUser' => array(
+			'className' => 'EducationsUser',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'LevelsUser' => array(
+			'className' => 'LevelsUser',
 			'foreignKey' => 'user_id',
 			'dependent' => false,
 			'conditions' => '',

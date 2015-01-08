@@ -2,7 +2,8 @@
 /**
  * @var View $this
  */
-print_r($user);
+//print_r($user['Positionlevel']);
+//print_r($user);
 $this->Form->create('User', array(
     'role' => 'form'
 ));
@@ -87,19 +88,22 @@ echo $this->Form->input('level', array(
     'placeholder' => 'Pangkat/Golongan'
 ));
 
+empty($positionLevel['Positionlevel']['id']) ? $value = 0 : $value = $positionLevel['Positionlevel']['id'];
+
 echo $this->Form->input('positionlevel_id', array(
     'type' => 'hidden',
     'label' => false,
     'div' => 'form-group',
     'class' => 'form-control',
     'id' => 'positionlevel_id',
-    'value' => 0
+    'value' => $value
 ));
 
 echo $this->Form->input('positionlevel', array(
     'type' => 'text',
     'id' => 'positionlevel',
-    'placeholder' => 'Jabatan Perawat'
+    'placeholder' => 'Jabatan Perawat',
+    'default' => $positionLevel['Positionlevel']['name']
 ));
 
 echo $this->Form->input('departement_id', array(
