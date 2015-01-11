@@ -24,9 +24,9 @@ class UsersController extends AppController
      */
     private $breadCrumb = array(
         0 => array(
-            'title'         => 'Profil',
-            'controller'    => 'users',
-            'action'    => '/'
+            'title' => 'Profil',
+            'controller' => 'users',
+            'action' => '/'
         )
     );
 
@@ -40,9 +40,9 @@ class UsersController extends AppController
     {
         $breadCrumb = $this->breadCrumb;
         $breadCrumb[1] = array(
-            'title'         => 'Ringkasan',
-            'controller'    => 'users',
-            'action'    => '/'
+            'title' => 'Ringkasan',
+            'controller' => 'users',
+            'action' => '/'
         );
 
         $this->layout = 'profile';
@@ -72,6 +72,22 @@ class UsersController extends AppController
             )
         ));
 
+        //education
+        $this->User->EducationsUser->unbindModel(array(
+            'belongsTo' => array('User')
+        ));
+        $education = $this->User->EducationsUser->find('first', array(
+            'recursive' => 0,
+            'order' => array('EducationsUser.id DESC'),
+            'conditions' => array(
+                'EducationsUser.user_id' => $this->Auth->user('id'),
+                'EducationsUser.active' => 1
+            )
+        ));
+        //position level
+        $this->User->UsersPositionlevel->unbindModel(array(
+            'belongsTo' => array('User')
+        ));
         $positionLevel = $this->User->UsersPositionlevel->find('first', array(
             'recursive' => 0,
             'order' => array('UsersPositionlevel.start DESC'),
@@ -81,15 +97,56 @@ class UsersController extends AppController
             )
         ));
 
-        $this->set(compact('title_for_layout', 'breadCrumb', 'user', 'positionLevel'));
+        //level
+        $this->User->LevelsUser->unbindModel(array(
+            'belongsTo' => array('User')
+        ));
+        $level = $this->User->LevelsUser->find('first', array(
+            'recursive' => 0,
+            'order' => array('LevelsUser.start DESC'),
+            'conditions' => array(
+                'LevelsUser.user_id' => $this->Auth->user('id'),
+                'LevelsUser.active' => 1
+            )
+        ));
+
+        //departement
+        $this->User->DepartementsUser->unbindModel(array(
+            'belongsTo' => array('User')
+        ));
+        $departement = $this->User->DepartementsUser->find('first', array(
+            'recursive' => 0,
+            'order' => array('DepartementsUser.start DESC'),
+            'conditions' => array(
+                'DepartementsUser.user_id' => $this->Auth->user('id'),
+                'DepartementsUser.active' => 1
+            )
+        ));
+
+        //chief
+        $chief = array();
+        if(isset($departement['DepartementsUser']['departement_id'])) {
+            $chief = $this->User->Departement->ChiefsDepartement->find('first', array(
+                'recursive' => 1,
+                'order' => array('ChiefsDepartement.start DESC'),
+                'conditions' => array(
+                    'ChiefsDepartement.departement_id' => $departement['DepartementsUser']['departement_id'],
+                    'ChiefsDepartement.active' => 1
+                )
+            ));
+        }
+
+
+        $this->set(compact('title_for_layout', 'breadCrumb', 'user','education', 'positionLevel', 'level', 'departement', 'chief'));
     }
 
-    public function basicinfo() {
+    public function basicinfo()
+    {
         $breadCrumb = $this->breadCrumb;
         $breadCrumb[1] = array(
-            'title'         => 'Informasi Dasar',
-            'controller'    => 'users',
-            'action'    => 'basicinfo'
+            'title' => 'Informasi Dasar',
+            'controller' => 'users',
+            'action' => 'basicinfo'
         );
 
         $this->layout = 'profile';
@@ -99,12 +156,13 @@ class UsersController extends AppController
         $this->set(compact('title_for_layout', 'breadCrumb'));
     }
 
-    public function password() {
+    public function password()
+    {
         $breadCrumb = $this->breadCrumb;
         $breadCrumb[1] = array(
-            'title'         => 'Ubah Password',
-            'controller'    => 'users',
-            'action'    => 'password'
+            'title' => 'Ubah Password',
+            'controller' => 'users',
+            'action' => 'password'
         );
 
         $this->layout = 'profile';

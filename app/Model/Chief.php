@@ -5,6 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property User $User
  * @property Departement $Departement
+ * @property ChiefsDepartement $ChiefsDepartement
  */
 class Chief extends AppModel {
 
@@ -78,6 +79,27 @@ class Chief extends AppModel {
 			'limit' => '',
 			'offset' => '',
 			'finderQuery' => '',
+		)
+	);
+
+	/**
+	 * hasMany associations
+	 *
+	 * @var array
+	 */
+	public $hasMany = array(
+		'ChiefsDepartement' => array(
+			'className' => 'ChiefsDepartement',
+			'foreignKey' => 'departement_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
 

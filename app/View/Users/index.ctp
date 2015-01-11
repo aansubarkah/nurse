@@ -46,12 +46,20 @@ if ($user['User']['sex'] == 0) $sex = 'Perempuan';
     </div>
     <div class="col-md-7">
         <blockquote>
-            <p><?php echo $positionLevel['Positionlevel']['name']; ?></p>
+            <p><?php if(isset($level['Level']['name'])) echo $level['Level']['name']; ?></p>
+            <footer><a href="#">Pangkat</a></footer>
+        </blockquote>
+        <blockquote>
+            <p><?php if(isset($positionLevel['Positionlevel']['name'])) echo $positionLevel['Positionlevel']['name']; ?></p>
             <footer><a href="#">Jabatan</a></footer>
         </blockquote>
         <blockquote>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+            <p><?php if(isset($departement['Departement']['name'])) echo $departement['Departement']['name']; ?></p>
+            <footer><a href="#">Unit Kerja</a></footer>
+        </blockquote>
+        <blockquote>
+            <p><?php if(isset($chief['User']['name'])) echo $chief['User']['name']; ?></p>
+            <footer><a href="#">Atasan</a></footer>
         </blockquote>
     </div>
 </div>

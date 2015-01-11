@@ -7,6 +7,7 @@ App::uses('AppModel', 'Model');
  * @property Departement $ChildDepartement
  * @property Chief $Chief
  * @property User $User
+ * @property ChiefsDepartement $ChiefsDepartement
  */
 class Departement extends AppModel {
 
@@ -83,6 +84,19 @@ class Departement extends AppModel {
 		'ChildDepartement' => array(
 			'className' => 'Departement',
 			'foreignKey' => 'parent_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'ChiefsDepartement' => array(
+			'className' => 'ChiefsDepartement',
+			'foreignKey' => 'departement_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
