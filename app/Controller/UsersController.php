@@ -84,6 +84,17 @@ class UsersController extends AppController
         $this->set(compact('title_for_layout', 'breadCrumb', 'user', 'positionLevel'));
     }
 
+    public function basicinfo() {
+        $breadCrumb = $this->breadCrumb;
+        $breadCrumb[1] = array(
+            'title'         => 'Informasi Dasar',
+            'controller'    => 'users',
+            'action'    => 'basicinfo'
+        );
+
+        $this->layout = 'profile';
+    }
+
     public function password() {
         $breadCrumb = $this->breadCrumb;
         $breadCrumb[1] = array(
