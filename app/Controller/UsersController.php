@@ -93,6 +93,10 @@ class UsersController extends AppController
         );
 
         $this->layout = 'profile';
+
+        $title_for_layout = 'Informasi Dasar';
+
+        $this->set(compact('title_for_layout', 'breadCrumb'));
     }
 
     public function password() {

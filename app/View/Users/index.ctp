@@ -33,8 +33,25 @@ if ($user['User']['sex'] == 0) $sex = 'Perempuan';
                 <small>Tempat Kelahiran</small>
             </dd>
         </dl>
+        <p class="text-right">
+            <small>
+                <?php
+                echo $this->Html->link('Ubah Informasi Dasar', array(
+                    'controller' => 'users',
+                    'action' => 'basicinfo'
+                ));
+                ?>
+            </small>
+        </p>
     </div>
-    <div class="col-md-3">
-
+    <div class="col-md-7">
+        <blockquote>
+            <p><?php echo $positionLevel['Positionlevel']['name']; ?></p>
+            <footer><a href="#">Jabatan</a></footer>
+        </blockquote>
+        <blockquote>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
     </div>
 </div>
